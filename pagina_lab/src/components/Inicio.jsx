@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react'
+
+import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import config from '../config/config.js';
-
 
 function Inicio() {
   const [experimentos, setExperimentos] = useState([]);
@@ -25,13 +25,10 @@ function Inicio() {
     try {
       setLoading(true);
       const response = await fetch(`${config.API_BASE_URL}/api/experimentos`);
-      
       if (!response.ok) {
         throw new Error('Error al cargar experimentos');
       }
-      
       const data = await response.json();
-      // Tomar solo los últimos 3 experimentos
       setExperimentos(data.slice(0, 3));
       setError('');
     } catch (error) {
@@ -55,10 +52,8 @@ function Inicio() {
   };
 
   return (
-
     <div className="min-h-screen bg-gray-50">
-      
-
+      {/* Hero Section */}
       <section className="bg-gradient-to-r from-blue-600 to-purple-700 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
@@ -84,6 +79,7 @@ function Inicio() {
         </div>
       </section>
 
+      {/* Últimos Experimentos */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
@@ -94,10 +90,8 @@ function Inicio() {
               Los descubrimientos más recientes del laboratorio
             </p>
           </div>
-          
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {loading ? (
-              // Skeleton loading para 3 tarjetas
               [...Array(3)].map((_, index) => (
                 <div key={index} className="bg-gray-50 rounded-xl overflow-hidden shadow-lg animate-pulse">
                   <div className="h-48 bg-gray-300"></div>
@@ -178,6 +172,7 @@ function Inicio() {
         </div>
       </section>
 
+      {/* Sobre el laboratorio */}
       <section className="py-16 bg-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -254,7 +249,7 @@ function Inicio() {
         </div>
       </footer>
     </div>
-  )
+  );
 }
 
-export default Inicio
+export default Inicio;
