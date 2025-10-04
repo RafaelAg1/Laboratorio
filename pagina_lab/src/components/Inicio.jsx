@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from "react-router-dom";
+import config from '../config/config.js';
 
 
 function Inicio() {
@@ -23,7 +24,7 @@ function Inicio() {
   const fetchUltimosExperimentos = async () => {
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:5000/api/experimentos');
+      const response = await fetch(`${config.API_BASE_URL}/api/experimentos`);
       
       if (!response.ok) {
         throw new Error('Error al cargar experimentos');
@@ -137,7 +138,7 @@ function Inicio() {
                     {experimento.imagen ? (
                       <div className="h-48 overflow-hidden">
                         <img 
-                          src={`http://localhost:5000/uploads/experimentos/${experimento.imagen}`}
+                          src={`${config.API_BASE_URL}/uploads/experimentos/${experimento.imagen}`}
                           alt={experimento.titulo}
                           className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                         />

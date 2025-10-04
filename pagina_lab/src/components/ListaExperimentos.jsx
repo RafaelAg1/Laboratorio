@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import config from '../config/config.js';
 import './ListaExperimentos.css';
 
 const ListaExperimentos = () => {
@@ -22,8 +23,8 @@ const ListaExperimentos = () => {
     try {
       setLoading(true);
       const url = filtroCategoria === 'todos' 
-        ? 'http://localhost:5000/api/experimentos'
-        : `http://localhost:5000/api/experimentos/categoria/${filtroCategoria}`;
+        ? `${config.API_BASE_URL}/api/experimentos`
+        : `${config.API_BASE_URL}/api/experimentos/categoria/${filtroCategoria}`;
       
       const response = await fetch(url);
       
@@ -137,7 +138,7 @@ const ListaExperimentos = () => {
               {experimento.imagen && (
                 <div className="card-image">
                   <img 
-                    src={`http://localhost:5000/uploads/experimentos/${experimento.imagen}`}
+                    src={`${config.API_BASE_URL}/uploads/experimentos/${experimento.imagen}`}
                     alt={experimento.titulo}
                     className="experimento-imagen"
                   />

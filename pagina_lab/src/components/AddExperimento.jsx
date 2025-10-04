@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import config from '../config/config.js';
 import './AddExperimento.css';
 
 const AddExperimento = () => {
@@ -82,7 +83,7 @@ const AddExperimento = () => {
         formData.append('imagen', imagen);
       }
 
-      const response = await fetch('http://localhost:5000/api/experimentos', {
+      const response = await fetch(`${config.API_BASE_URL}/api/experimentos`, {
         method: 'POST',
         body: formData // No incluir Content-Type header, el navegador lo hará automáticamente
       });

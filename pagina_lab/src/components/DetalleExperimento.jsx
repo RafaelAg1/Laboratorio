@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import config from '../config/config.js';
 import './DetalleExperimento.css';
 
 const DetalleExperimento = () => {
@@ -30,7 +31,7 @@ const DetalleExperimento = () => {
   const fetchExperimento = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`http://localhost:5000/api/experimentos/${id}`);
+      const response = await fetch(`${config.API_BASE_URL}/api/experimentos/${id}`);
       
       if (!response.ok) {
         throw new Error('Experimento no encontrado');
@@ -102,7 +103,7 @@ const DetalleExperimento = () => {
         formData.append('imagen', imagen);
       }
 
-      const response = await fetch(`http://localhost:5000/api/experimentos/${id}`, {
+      const response = await fetch(`${config.API_BASE_URL}/api/experimentos/${id}`, {
         method: 'PUT',
         body: formData
       });
@@ -128,7 +129,7 @@ const DetalleExperimento = () => {
   const handleDelete = async () => {
     if (window.confirm('¿Estás seguro de que quieres eliminar este experimento? Esta acción no se puede deshacer.')) {
       try {
-        const response = await fetch(`http://localhost:5000/api/experimentos/${id}`, {
+        const response = await fetch(`${config.API_BASE_URL}/api/experimentos/${id}`, {
           method: 'DELETE'
         });
 
@@ -257,7 +258,7 @@ const DetalleExperimento = () => {
                   <h4>Imagen actual:</h4>
                   {experimento.imagen ? (
                     <img 
-                      src={`http://localhost:5000/uploads/experimentos/${experimento.imagen}`}
+                      src={`${config.API_BASE_URL}/uploads/experimentos/${experimento.imagen}`}
                       alt={experimento.titulo}
                       className="current-img"
                     />
@@ -290,7 +291,7 @@ const DetalleExperimento = () => {
             ) : (
               experimento.imagen && (
                 <img 
-                  src={`http://localhost:5000/uploads/experimentos/${experimento.imagen}`}
+                  src={`${config.API_BASE_URL}/uploads/experimentos/${experimento.imagen}`}
                   alt={experimento.titulo}
                   className="experimento-imagen"
                 />
